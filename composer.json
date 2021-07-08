@@ -1,9 +1,20 @@
 {
     "name": "loafer/laravel-gateway-api",
     "description": "Unofficial package for GatewayApi",
-    "type": "library",
-    "require": {},
     "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Ruslan Popelyshyn",
+            "email": "platonpopelishin@gmail.com",
+            "role": "Developer",
+            "homepage": "https://github.com/Loafer19"
+        }
+    ],
+    "require": {
+        "php": "^7.1|^8.0",
+        "illuminate/support": "^6.0|^7.0|^8.0"
+    },
     "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
