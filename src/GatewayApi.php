@@ -2,12 +2,13 @@
 
 namespace Loafer\GatewayApi;
 
-
 use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\RequestOptions;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Subscriber\Oauth\Oauth1;
+
+use InvalidArgumentException;
 
 class GatewayApi
 {
@@ -39,8 +40,11 @@ class GatewayApi
 
     public function setSenderName(string $name)
     {
-        // TODO: Up to 11 alphanumeric characters, or 15 digits
-        $this->sender_name = substr($name, 0, 15);
+        if (!preg_match("/^[[:alnum:] ]{1,11}$|^[[:digit:]]{1,15}$/", $name, $matches)) {
+            throw new InvalidArgumentException('The sender\'s name must contain up to 11 alphanumeric characters or up to 15 digits, ' . $name);
+        };
+
+        $this->sender_name = $name;
 
         return $this;
     }
