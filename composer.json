@@ -1,6 +1,6 @@
 {
     "name": "loafer/laravel-gateway-api",
-    "description": "Unofficial package for GatewayApi",
+    "description": "Unofficial laravel package for GatewayApi",
     "license": "MIT",
     "type": "library",
     "authors": [
@@ -20,6 +20,13 @@
     "autoload": {
         "psr-4": {
             "Loafer\\LaravelGatewayApi\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Loafer\\GatewayApi\\GatewayApiServiceProvider"
+            ]
         }
     }
 }

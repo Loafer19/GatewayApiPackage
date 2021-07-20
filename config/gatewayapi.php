@@ -2,7 +2,9 @@
 
 return [
 
-    'api_token'    => env('GATEWAY_TOKEN', ''),
+    'api_key' => env('GATEWAY_API_KEY', ''),
 
-    'sender'       => env('GATEWAY_SENDER', config('app.name')),
+    'api_secret' => env('GATEWAY_API_SECRET', ''),
+
+    'sender_name' => env('GATEWAY_SENDER_NAME', config('app.name')),
 ];

@@ -57,10 +57,10 @@ class GatewayApi
             $body['recipients'][] = ['msisdn' => $recipient];
         }
 
-        $this->makeRequest('POST', '/rest/mtsms', $body);
+        $this->sendRequest('POST', '/rest/mtsms', $body);
     }
 
-    private function makeRequest(string $method, string $end_point, ?array $body)
+    private function sendRequest(string $method, string $end_point, ?array $body)
     {
         try {
             return $this->client->request(
