@@ -27,11 +27,24 @@ GATEWAY_SENDER="Milky Way"
 
 On the fly
 ```
-(new GatewayApi())
-    ->setSenderName('Elon Musk')
+GatewayApi::setSenderName('Elon Musk')
     ->sendSimpleSMS('test message', [+380987654321])
 ```
 
 By default, the sender's name is the name of the app
 
 Up to 11 alphanumeric characters or 15 digits
+
+### Callback Url
+
+[Official Docs](https://gatewayapi.com/docs/apis/rest/#http-callback)
+
+You can easily specify the callback url:
+
+On the fly
+```
+GatewayApi::setCallbackUrl('https://test-dev.com/callbacks/sms')
+    ->sendSimpleSMS('test message', [+380987654321])
+```
+
+By default, the callback url is null

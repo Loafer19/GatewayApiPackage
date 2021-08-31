@@ -15,6 +15,7 @@ class GatewayApi
     private $client;
 
     private $sender_name;
+    private $callback_url = null;
 
     public function __construct()
     {
@@ -49,6 +50,17 @@ class GatewayApi
         return $this;
     }
 
+    public function setCallbackUrl(string $url)
+    {
+        if (!filter_var($url, FILTER_VALIDATE_URL)) {
+            throw new InvalidArgumentException('The callback URL is invalid, ' . $url);
+        };
+
+        $this->callback_url = $url;
+
+        return $this;
+    }
+
     public function sendSimpleSMS(string $message, array $recipients)
     {
         $body = [
@@ -56,6 +68,10 @@ class GatewayApi
             'recipients' => [],
             'sender' => $this->sender_name
         ];
+
+        if ($this->callback_url) {
+            $body['callback_url'] = $this->callback_url;
+        }
 
         foreach ($recipients as $recipient) {
             $body['recipients'][] = ['msisdn' => $recipient];

@@ -13,7 +13,9 @@ class GatewayApiServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind('gatewayapi', function ($app) {
+            return new GatewayApi();
+        });
     }
 
     /**
