@@ -5,8 +5,10 @@ namespace Loafer\GatewayApi;
 use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\RequestOptions;
-use GuzzleHttp\Exception\ClientException;
+
 use GuzzleHttp\Subscriber\Oauth\Oauth1;
+
+use GuzzleHttp\Exception\ClientException;
 
 use InvalidArgumentException;
 
@@ -31,8 +33,6 @@ class GatewayApi
         $middleware = new Oauth1([
             'consumer_key'    => config('gatewayapi.api_key'),
             'consumer_secret' => config('gatewayapi.api_secret'),
-            'token'           => '',
-            'token_secret'    => '',
         ]);
 
         $stack->push($middleware);
@@ -78,7 +78,7 @@ class GatewayApi
             throw new InvalidArgumentException('The SMS label must contain up to 255 characters, ' . $label);
         };
 
-        $this->lable = $label;
+        $this->sms_label = $label;
 
         return $this;
     }
@@ -118,13 +118,13 @@ class GatewayApi
         $this->sendRequest('POST', '/rest/mtsms', $body);
     }
 
-    private function sendRequest(string $method, string $end_point, ?array $body)
+    private function sendRequest(string $method, string $endpoint, array $body = [])
     {
         try {
             return $this->client->request(
                 $method,
-                $end_point,
-                $body !== null ? [RequestOptions::JSON => $body] : []
+                $endpoint,
+                [RequestOptions::JSON => $body]
             );
         } catch (ClientException $exception) {
             throw $exception;
