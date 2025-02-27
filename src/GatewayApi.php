@@ -31,7 +31,7 @@ class GatewayApi
         $stack = HandlerStack::create();
 
         $middleware = new Oauth1([
-            'consumer_key'    => config('gatewayapi.api_key'),
+            'consumer_key' => config('gatewayapi.api_key'),
             'consumer_secret' => config('gatewayapi.api_secret'),
         ]);
 
@@ -50,51 +50,51 @@ class GatewayApi
         }
     }
 
-    public function setSenderName(string $name)
+    public function setSenderName(string $name): static
     {
         if (!preg_match("/^[[:alnum:] ]{1,11}$|^[[:digit:]]{1,15}$/", $name, $matches)) {
             throw new InvalidArgumentException('The sender\'s name must contain up to 11 alphanumeric characters or up to 15 digits, ' . $name);
-        };
+        }
 
         $this->sender_name = $name;
 
         return $this;
     }
 
-    public function setCallbackUrl(string $url)
+    public function setCallbackUrl(string $url): static
     {
         if (!filter_var($url, FILTER_VALIDATE_URL)) {
             throw new InvalidArgumentException('The callback URL is invalid, ' . $url);
-        };
+        }
 
         $this->callback_url = $url;
 
         return $this;
     }
 
-    public function setSmsLabel(string $label)
+    public function setSmsLabel(string $label): static
     {
         if (strlen($label) > 255) {
             throw new InvalidArgumentException('The SMS label must contain up to 255 characters, ' . $label);
-        };
+        }
 
         $this->sms_label = $label;
 
         return $this;
     }
 
-    public function setSmsClass(string $class)
+    public function setSmsClass(string $class): static
     {
         if (!in_array($class, [self::SMS_CLASS_STANDART, self::SMS_CLASS_PREMIUM, self::SMS_CLASS_SECRET])) {
             throw new InvalidArgumentException('The SMS class must be standard, premium or secret, ' . $class);
-        };
+        }
 
         $this->sms_class = $class;
 
         return $this;
     }
 
-    public function sendSimpleSms(string $message, array $recipients)
+    public function sendSimpleSms(string $message, array $recipients): void
     {
         $body = [
             'class' => $this->sms_class,
@@ -118,7 +118,7 @@ class GatewayApi
         $this->sendRequest('POST', '/rest/mtsms', $body);
     }
 
-    private function sendRequest(string $method, string $endpoint, array $body = [])
+    private function sendRequest(string $method, string $endpoint, array $body = []): mixed
     {
         try {
             return $this->client->request(

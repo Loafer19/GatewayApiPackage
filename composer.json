@@ -1,35 +1,34 @@
 {
-    "name": "loafer/laravel-gateway-api",
-    "description": "Unofficial laravel package for GatewayApi",
-    "license": "MIT",
-    "type": "library",
     "authors": [
         {
-            "name": "Ruslan Popelyshyn",
             "email": "platonpopelishin@gmail.com",
-            "role": "Developer",
-            "homepage": "https://github.com/Loafer19"
+            "homepage": "https://github.com/Loafer19",
+            "name": "Popelyshyn Ruslan",
+            "role": "Developer"
         }
     ],
-    "require": {
-        "php": "^7.4|^8.0|^8.1",
-        "illuminate/support": "^6.0|^7.0|^8.0|^9.0",
-        "guzzlehttp/oauth-subscriber": "^0.5|^0.6"
-    },
-    "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
             "Loafer\\GatewayApi\\": "src/"
         }
     },
+    "description": "Unofficial laravel package for GatewayApi",
     "extra": {
         "laravel": {
-            "providers": [
-                "Loafer\\GatewayApi\\GatewayApiServiceProvider"
-            ],
             "aliases": {
                 "GatewayApi": "Loafer\\GatewayApi\\Facades\\GatewayApi"
-            }
+            },
+            "providers": [
+                "Loafer\\GatewayApi\\GatewayApiServiceProvider"
+            ]
         }
-    }
+    },
+    "license": "Unlicense",
+    "name": "loafer/laravel-gateway-api",
+    "require": {
+        "guzzlehttp/oauth-subscriber": "*",
+        "illuminate/support": "*",
+        "php": "*"
+    },
+    "type": "library"
 }
